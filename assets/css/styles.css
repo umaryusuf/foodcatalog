@@ -1,0 +1,87 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body{
+	font-family: ubuntu;
+	background-color: #efefef;
+	margin-top: 55px;
+	font-size: 14px;
+}
+.navbar-brand, h1, .card-title, .nice-font{
+	font-family: lobster;
+}
+#particles-js{
+	background: firebrick;
+	height: 360px;
+}
+#content{
+	position: absolute;
+	top: 80px;
+	left: auto;
+	right: auto;
+	color: #fef;
+	width: 100%;
+}
+#animate{
+	animation-duration: 2s;
+	animation-delay: 1s;
+	animation-iteration-count: infinite;
+}
+input, select{
+	box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding: 12px 18px;
+  border-radius: 0!important;
+  border: 1px solid #dbdbdb;
+}
+.btn-group > a{
+	border-radius: 0;
+	display: inline-block;
+	width: 50%!important;
+}
+.btn-group > a > span.text{
+	font-size: 12px!important;
+}
+.hide{
+	display: none;
+}
+.food-img{
+	height: 220px;
+}
+.sidebar li{
+	list-style-type: none;
+}
+.sidebar li + li{
+	border-top: 1px solid #007bff;
+}
+.sidebar li a{
+	display: inline-block;
+	width: 100%;
+	padding: 10px;
+}
+.sidebar li a:hover{
+	color: #fff;
+	background: #ccc;
+	text-decoration: none;
+}
+.highlight{
+	color: #fff;
+	background: #bbb;
+}
+.btop{
+	border-top: 1px solid #ddd;
+}
+footer{
+	margin-top: 15px;
+	padding: 20px 0;
+}
+.img-comment{
+	width: 80px;
+	height: 80px;
+}
+.profile-img{
+	width: 200px;
+	height: 200px;
+}
