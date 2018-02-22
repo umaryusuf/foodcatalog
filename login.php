@@ -1,4 +1,10 @@
 <?php
+session_start();
+// prevent logged in user from acessing this page
+if (isset($_SESSION['user_id'])) {
+	header('Location: index.php');
+}
+
 $page = "Login";
 
 require_once 'config/db.php';
@@ -80,7 +86,7 @@ require_once 'includes/nav.php';
 		<div class="col-md-4 mx-auto">
 			<div class="card card-body bg-light mt-4">
 				<div class="text-center mb-2">
-					<span class="fa-stack fa-5x text-primary">
+					<span class="fa-stack fa-5x text-cyan">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
         	</span>
@@ -89,16 +95,16 @@ require_once 'includes/nav.php';
 				<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
 					<div class="form-group">
 						<label for="email">Email:</label>
-						<input type="text" class="form-control form-control-lg <?php echo (!empty($email_err)) ? 'is-invalid' : '' ?>" name="email" id="email" value="<?php echo $email; ?>" placeholder="you@yourmail.com">
+						<input type="text" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : '' ?>" name="email" id="email" value="<?php echo $email; ?>" placeholder="you@yourmail.com">
 						<span class="invalid-feedback"><?php echo $email_err; ?></span>
 					</div>
 					<div class="form-group">
 						<label for="password">Password:</label>
-						<input type="password" class="form-control form-control-lg <?php echo (!empty($password_err)) ? 'is-invalid' : '' ?>" name="password" value="<?php echo $password ?>" id="password" placeholder="Enter your password">
+						<input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : '' ?>" name="password" value="<?php echo $password ?>" id="password" placeholder="Enter your password">
 						<span class="invalid-feedback"><?php echo $password_err; ?></span>
 					</div>
-					<input type="submit" class="btn btn-success btn-lg btn-block" value="Login">
-					<a href="register.php" class="btn btn-light btn-block">Don't have an account? register</a>
+					<input type="submit" class="btn bg-cyan btn-lg btn-block" value="Login">
+					<a href="register.php" class="btn btn-link text-cyan btn-block">Don't have an account? register</a>
 				</form>
 			</div>
 		</div>

@@ -45,9 +45,9 @@ if ($stmt = $pdo->prepare($sql)) {
 ?>
 <!-- start main content -->
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-3 mt-4">
+		<div class="col-md-3 mt-4 ">
 			<?php require_once 'includes/sidebar.php'; ?>
 		</div>
 		<div class="col-md-9 mt-4">
@@ -83,7 +83,7 @@ if ($stmt = $pdo->prepare($sql)) {
 			<?php else: 
 				foreach ($result as $data): ?>
 
-				<div class="col-sm-6 mb-2">
+				<div class="col-sm-4 mb-2">
 					<div class="card">
 						<img src="assets/images/<?php echo $data['photo'] ?>" alt="Card Image" class="food-img card-img-top">
 						<div class="card-body">
@@ -91,45 +91,38 @@ if ($stmt = $pdo->prepare($sql)) {
 							<p class="card-text"><?php echo $data['description']; ?></p>
 							<hr>
 							<p>Posted on: <?php echo $data['date_created']; ?></p>
-							<div class="row">
-								<div class="col-sm-6">
-									<p><a href="edit_share.php?share_id=<?php echo $data['id']; ?>" class="btn btn-warning btn-block">Edit</a></p>
-								</div>
-								<div class="col-sm-6">
-									<p><a href="delete_share.php?share_id=<?php echo $data['id']; ?>" id="deleteBtn" class="btn btn-danger btn-block">Delete</a></p>
-								</div>
+							<div class="btn-group">
+									<a href="edit_share.php?share_id=<?php echo $data['id']; ?>" class="btn btn-warning" style="color:#fff">&nbsp; Edit &nbsp;</a>
+									<a href="delete_share.php?share_id=<?php echo $data['id']; ?>" id="deleteBtn" class="btn btn-danger btn-block">Delete</a>
+									<a href="comments.php?share_id=<?php echo $data['id'] ?>" class="btn bg-cyan">comments</a>
 							</div>
 						</div>
-						<div class="card-footer" style="padding: 0;">
-							<div class="btn-group" style="width: 100%">
-							  <a href="#" class="btn btn-primary" data-toggle="tooltip" title="likes">
-									<i class="fa fa-thumbs-up"></i> <span class="text"> <span class="badge badge-dark">11</span></span>
-							  </a>
-							  <a href="comments.php?share_id=<?php echo $data['id']; ?>" class="btn btn-primary" data-toggle="tooltip" title="comments">
-							  	<i class="fa fa-comments-o"></i> 
-							  	<span class="text"> 
-							  		<span class="badge badge-dark">
-							  			<?php  
-							  				$sql = "SELECT COUNT(id) FROM comments WHERE share_id=:share_id";
-							  				if($stmt = $pdo->prepare($sql)){
-							  					$stmt->bindParam(":share_id", $data["id"], PDO::PARAM_INT);
+						<div class="card-footer" style="font-size: 14px">
+						<div class="row">
+							<div class="col">
+								<span class=""><i class="fa fa-heart"></i> <?php echo $data['likes']; ?> likes</span>
+							</div>
+							<div class="col">
+								<span class="">
+				  			<?php  
+					  				$sql = "SELECT COUNT(id) FROM comments WHERE share_id=:share_id";
+					  				if($stmt = $pdo->prepare($sql)){
+					  					$stmt->bindParam(":share_id", $data["id"], PDO::PARAM_INT);
 
-							  					if($stmt->execute()){
-							  						if($stmt->rowCount() > 0) {
-							  							$num = $stmt->fetch();
-							  							echo $num[0];
-							  						}else{
-							  							echo "0";
-							  						}
-							  					}
-							  				}
-							  				
-							  			?>
-							  		</span>
-							  	</span>
-							  </a>
+					  					if($stmt->execute()){
+					  						if($stmt->rowCount() > 0) {
+					  							$num = $stmt->fetch();
+					  							echo '<i class="fa fa-comments-o"></i> '.$num[0].' comments';
+					  						}else{
+					  							echo '<i class="fa fa-comments-o"></i> 0 comment';
+					  						}
+					  					}
+					  				}
+					  			?>
+				  			</span>
 							</div>
 						</div>
+					</div>
 					</div>
 				</div>
 				

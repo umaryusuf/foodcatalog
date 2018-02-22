@@ -9,7 +9,7 @@ require_once 'includes/nav.php';
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 ">
-			<div class="card card-body bg-light mt-2">
+			<div class=" mt-2">
 				<h3>Contact Us</h3>
 				<p>Send your message, questions or recommendations</p>
 				<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
@@ -32,7 +32,7 @@ require_once 'includes/nav.php';
 						<label for="message">Message:</label>
 						<textarea name="message" id="message" class="form-control" rows="5"></textarea>
 					</div>
-					<input type="submit" class="btn btn-success btn-block" value="Send Message">
+					<input type="submit" class="btn bg-cyan btn-block" value="Send Message">
 				</form>
 			</div>
 		</div>

@@ -1,10 +1,12 @@
 		<?php
+		if(isset($_SESSION['user_id'])){
 			$req = $pdo->prepare("SELECT picture FROM users WHERE id=:user_id");
 			$req->bindParam(":user_id", $_SESSION['user_id'], PDO::PARAM_INT);
 			$req->execute();
 			$pic = $req->fetch();
+		}
 		?>
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-cyan">
 			<a class="navbar-brand" href="index.php">OACCFL</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>

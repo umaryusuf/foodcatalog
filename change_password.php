@@ -107,7 +107,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
 ?>
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-3 mt-4">
 			<?php require_once 'includes/sidebar.php'; ?>
@@ -134,7 +134,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 					<input type="password" class="form-control <?php echo (!empty($confirm_pass_err)) ? 'is-invalid' : '' ?>" name="confirm_pass" value="<?php echo $confirm_pass; ?>" id="confirm_pass" placeholder="Confirm your new password">
 					<span class="invalid-feedback"><?php echo $confirm_pass_err; ?></span>
 				</div>
-				<input type="submit" class="btn btn-success btn-block" value="Change Password">
+				<input type="submit" class="btn btn-block bg-cyan" value="Change Password">
 			</form>
 		</div>
 	</div>

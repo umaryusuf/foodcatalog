@@ -144,7 +144,7 @@ require_once 'includes/nav.php';
 ?>
 <!-- start main content -->
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-3 mt-4">
 			<?php require_once 'includes/sidebar.php'; ?>

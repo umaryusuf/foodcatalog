@@ -68,7 +68,7 @@ if (isset($_POST['update_comment'])) {
 	$_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 	// put POST vars into regular variables
 	$comment_id = $_POST['comment_id'];
-	$msg = test_input($_POST['message']);
+	$msg = ucfirst(test_input($_POST['message']));
 
 	if (empty($msg)) {
 		$comment_err = "Comment field is empty";
@@ -127,45 +127,38 @@ require_once 'includes/nav.php';
 		<div class="row">
 			<div class="col-md-4">
 				<div class="card">
-					<img src="assets/images/<?php echo $data['photo'] ?>" alt="Card Image" style="height: 250px" class="food-img card-img-top">
+					<img src="assets/images/<?php echo $data['photo'] ?>" alt="<?php echo $data['food_name'] ?>" style="height: 250px" class="food-img card-img-top">
 					<div class="card-body">
 						<h4 class="card-title"><?php echo $data['food_name']; ?></h4>
 						<p class="card-text"><?php echo $data['description']; ?></p>
 						<hr>
 						<p>Posted on: <?php echo $data['date_created']; ?></p>
 					</div>
-					<div class="card-footer" style="padding: 0;">
-						<form action="like.php?share_id=<?php echo $data['id']; ?>" method="POST">
-							<div class="btn-group" style="width: 100%">
-							  <a href="#" id="likeBtn" class="btn btn-primary" data-id="<?php echo $data['id'] ?>" data-toggle="tooltip" title="likes">
-									<i class="fa fa-thumbs-up"></i> <span class="text"> <span class="badge badge-dark">11</span></span>
-							  </a>
-							  <a href="comments.php?share_id=<?php echo $share_id; ?>" class="btn btn-primary" data-toggle="tooltip" title="comments">
-							  	<i class="fa fa-comments-o"></i> 
-							  	<span class="text"> 
-							  		<span class="badge badge-dark">
-							  			<?php  
-								  				$sql = "SELECT COUNT(id) FROM comments WHERE share_id=:share_id";
-								  				if($stmt = $pdo->prepare($sql)){
-								  					$stmt->bindParam(":share_id", $data["id"], PDO::PARAM_INT);
-
-								  					if($stmt->execute()){
-								  						if($stmt->rowCount() > 0) {
-								  							$num = $stmt->fetch();
-								  							echo $num[0];
-								  						}else{
-								  							echo "0";
-								  						}
-								  					}
-								  				}
-								  				unset($stmt);
-								  				unset($pdo);
-								  			?>
-							  		</span>
-							  	</span>
-							  </a>
+					<div class="card-footer" style="font-size: 16px">
+						<div class="row">
+							<div class="col">
+								<span class=""><i class="fa fa-heart"></i> <?php echo $data['likes']; ?> likes</span>
 							</div>
-						</form>
+							<div class="col">
+								<span class="">
+				  			<?php  
+					  				$sql = "SELECT COUNT(id) FROM comments WHERE share_id=:share_id";
+					  				if($stmt = $pdo->prepare($sql)){
+					  					$stmt->bindParam(":share_id", $data["id"], PDO::PARAM_INT);
+
+					  					if($stmt->execute()){
+					  						if($stmt->rowCount() > 0) {
+					  							$num = $stmt->fetch();
+					  							echo '<i class="fa fa-comments-o"></i> '.$num[0].' comments';
+					  						}else{
+					  							echo '<i class="fa fa-comments-o"></i> 0 comment';
+					  						}
+					  					}
+					  				}
+					  			?>
+				  			</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -199,16 +192,16 @@ require_once 'includes/nav.php';
 					<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']).'?share_id='.$share_id; ?>" method="post">
 						<div class="form-group">	
 							<label for="message">Your comment:</label>
-							<textarea name="message" id="message" rows="3" class="form-control <?php echo ($comment_err !== '') ? 'is-invalid' : '' ?>"></textarea>
+							<textarea name="message" id="message" rows="2" class="form-control <?php echo ($comment_err !== '') ? 'is-invalid' : '' ?>"></textarea>
 							<span class="invalid-feedback"><?php echo $comment_err; ?></span>
 						</div>
-						<button type="submit" name="add_comment" class="btn btn-primary">Add Comment <i class="fa fa-comment-o"></i></button>
+						<button type="submit" name="add_comment" class="btn bg-cyan">Add Comment <i class="fa fa-comment-o"></i></button>
 					</form>
 					<hr>
 				<?php else: ?>
 					<div class="alert alert-info alert-dismissable fade show">
 					  <button type="button" class="close" data-dismiss="alert">&times;</button>
-					  <strong>info! </strong>please <a href="login.php">login</a> to add comment
+					  <strong>info! </strong>please <a href="login.php">login</a> to like or add comment 
 					</div>
 				<?php endif ?>
 				<!-- tell the user if there is no comment

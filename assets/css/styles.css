@@ -48,13 +48,13 @@ input, select{
 	display: none;
 }
 .food-img{
-	height: 220px;
+	height: 200px;
 }
 .sidebar li{
 	list-style-type: none;
 }
 .sidebar li + li{
-	border-top: 1px solid #007bff;
+	border-top: 1px solid #00bcd4;
 }
 .sidebar li a{
 	display: inline-block;
@@ -84,4 +84,20 @@ footer{
 .profile-img{
 	width: 200px;
 	height: 200px;
+}
+.card-btn {
+	display: inline-block;
+	width: 50%;
+}
+.bg-cyan{
+	background-color: #00bcd4;
+}
+.btn.bg-cyan {
+	color: #fff;
+}
+.text-cyan {
+	color: #00bcd4;
+}
+.btn:hover {
+	box-shadow: 2px 2px 2px 3px #ddd;
 }

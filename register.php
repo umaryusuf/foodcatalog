@@ -1,4 +1,10 @@
 <?php
+session_start();
+// prevent logged in user from acessing this page
+if (isset($_SESSION['user_id'])) {
+	header('Location: index.php');
+}
+
 $page = "Register";
 
 require_once 'config/db.php';
@@ -114,14 +120,14 @@ require_once 'includes/nav.php';
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 mx-auto">
-			<div class="card card-body bg-light mt-2">
-				<div class="text-center mb-2">
-					<span class="fa-stack fa-5x text-primary">
+			<div class="card card-body bg-light mt-1">
+				<div class="text-center mb-0">
+					<span class="fa-stack fa-5x text-cyan">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
         	</span>
 				</div>
-				<p>Fill in this form to create your account</p>
+				<!-- <p>Fill in this form to create your account</p> -->
 				<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
 					<div class="form-group">
 						<label for="name">Name:</label>
@@ -150,10 +156,10 @@ require_once 'includes/nav.php';
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<input type="submit" class="btn btn-success btn-block btn-lg" value="Register">
+							<input type="submit" class="btn bg-cyan btn-block" value="Register">
 						</div>
 						<div class="col">
-							<a href="login.php" class="btn btn-light btn-block">Have an account? login</a>
+							<a href="login.php" class="btn btn-link text-cyan btn-block">Have an account? login</a>
 						</div>
 					</div>
 				</form>
